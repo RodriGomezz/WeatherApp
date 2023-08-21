@@ -8,6 +8,7 @@ import { MatInputModule } from '@angular/material/input';
 import { MatCardModule } from '@angular/material/card';
 import { MatIconModule } from '@angular/material/icon';
 import { MatRadioModule } from '@angular/material/radio';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 
 @NgModule({
   declarations: [],
@@ -20,6 +21,7 @@ import { MatRadioModule } from '@angular/material/radio';
     MatCardModule,
     MatIconModule,
     MatRadioModule,
+    MatProgressSpinnerModule
   ],
 })
 export class MaterialModule {}

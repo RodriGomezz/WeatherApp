@@ -52,7 +52,7 @@
     <mat-radio-button value="imperial">Fahrenheit</mat-radio-button>
   </mat-radio-group>
 
-  <div>
+  <div class="captcha">
     <re-captcha
       (resolved)="resolved($event)"
       siteKey="6LdG5aQnAAAAAIftrNzawVMriGJcLUc0OpcGw3YD"
@@ -68,10 +68,18 @@
     mat-raised-button
     color="accent"
     (click)="cityApi(model)"
+    *ngIf="!showSpinner"
   >
     See current weather
   </button>
+
+  <div class="spinner" *ngIf="showSpinner">  
+    <mat-spinner color="accent"></mat-spinner>
+  </div>
+
 </div>
+
+<!-------------- data from weather child -------------->
 
 <app-weather
   *ngIf="isWeatherLoaded"

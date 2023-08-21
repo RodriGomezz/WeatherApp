@@ -21,40 +21,45 @@ export class SelectCityComponent {
   sunset: any;
   sunrise: any;
   captchaRes = '';
+  showSpinner = false
 
   constructor(private weatherService: WeatherService) {}
 
   resolved(captchaResponse: string) {
     this.captchaRes = captchaResponse;
   }
-
+  // Request the data from api weather
   cityApi(cities: any) {
-    if (this.model.country && this.model.city && this.captchaRes) {
-      this.weatherService
-        .citiesApi(cities.country, cities.city, this.selectedValue)
-        .subscribe({
-          next: (res) => {
-            this.weather = res;
-            if (this.selectedValue === 'metric') {
-              this.grade = 'C';
-              this.windSpeed = 'm/s';
-            } else {
-              this.grade = 'F';
-              this.windSpeed = 'mph';
-            }
-            this.isWeatherLoaded = true;
-          },
-          error: (errorMessage) => {
-            this.error = errorMessage;
-          },
-        });
-      this.error = '';
-    } else if (!this.captchaRes) {
-      this.error = 'you must complete the captcha';
-    } else if (!this.model.country) {
-      this.error = 'Introduce a country';
-    } else if (!this.model.city) {
-      this.error = 'Introduce a city';
+      if (this.model.country && this.model.city && this.captchaRes ) {
+        this.showSpinner = true
+        this.weatherService
+          .citiesApi(cities.country, cities.city, this.selectedValue)
+          .subscribe({
+            next: (res) => {
+              this.weather = res;
+              if (this.selectedValue === 'metric') {
+                this.grade = 'C';
+                this.windSpeed = 'm/s';
+              } else {
+                this.grade = 'F';
+                this.windSpeed = 'mph';
+              }
+              this.isWeatherLoaded = true;
+              this.showSpinner = false 
+            },
+            error: (errorMessage) => {
+              this.error = errorMessage;
+              this.showSpinner = false 
+            },
+          });
+          this.error = '';
+        } else if (!this.captchaRes) {
+          this.error = 'you must complete the captcha';
+        } else if (!this.model.country) {
+          this.error = 'Introduce a country';
+        } else if (!this.model.city) {
+          this.error = 'Introduce a city';
+        } 
+      }
     }
-  }
-}
+    
