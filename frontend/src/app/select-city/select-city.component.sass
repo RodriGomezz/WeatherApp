@@ -1,0 +1,44 @@
+:host
+    display:  block
+    // background: linear-gradient(to bottom, #006d77 0%,#83c5be 100%)
+    background: radial-gradient(#83c5be 0%,#006d77 100%)
+    height: 100vh
+    overflow: auto
+
+.container
+    display: grid
+    place-content: center
+    height: 75vh
+
+.containerWeather
+    display: flex
+    flex-wrap: wrap
+    width: 60%
+    margin: 1rem auto
+    justify-content: center
+    align-items: center
+    color: white
+    gap: 20px
+    padding-top: 30px
+    .input
+        height: 70px
+    .radio-select
+        width: 150px
+
+.input
+    display: grid
+    width: 300px
+
+.error
+    color: red
+    display: grid
+    place-content: center
+
+.btn
+    grid-column: 2/4
+    margin: auto
+    width: 300px
+    margin-top: 50px
+
+::ng-deep mat-radio-group mat-radio-button .mdc-form-field
+    color: white !important

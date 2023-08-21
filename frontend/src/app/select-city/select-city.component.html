@@ -1,0 +1,81 @@
+<div
+  [ngClass]="{ containerWeather: isWeatherLoaded, container: !isWeatherLoaded }"
+>
+  <div class="input">
+    <mat-form-field>
+      <mat-label>Country</mat-label>
+      <input
+        type="text"
+        matInput
+        placeholder="country"
+        required
+        [(ngModel)]="model.country"
+        name="country"
+      />
+    </mat-form-field>
+    <p
+      class="error"
+      *ngIf="
+        this.error === 'Country does not exist' ||
+        this.error === 'Introduce a country'
+      "
+    >
+      {{ this.error }}
+    </p>
+  </div>
+
+  <div class="input">
+    <mat-form-field>
+      <mat-label>City</mat-label>
+      <input
+        type="text"
+        matInput
+        placeholder="city"
+        required
+        [(ngModel)]="model.city"
+        name="city"
+      />
+    </mat-form-field>
+    <p
+      class="error"
+      *ngIf="
+        this.error === 'City does not exist' ||
+        this.error === 'Introduce a city'
+      "
+    >
+      {{ this.error }}
+    </p>
+  </div>
+
+  <mat-radio-group class="radio-select" [(ngModel)]="selectedValue" aria-label="Select an option">
+    <mat-radio-button value="metric">Celsius</mat-radio-button>
+    <mat-radio-button value="imperial">Fahrenheit</mat-radio-button>
+  </mat-radio-group>
+
+  <div>
+    <re-captcha
+      (resolved)="resolved($event)"
+      siteKey="6LdG5aQnAAAAAIftrNzawVMriGJcLUc0OpcGw3YD"
+    ></re-captcha>
+    <p class="error" *ngIf="this.error === 'you must complete the captcha'">
+      {{ this.error }}
+    </p>
+  </div>
+
+  <button
+    class="btn-currentWeather"
+    [ngClass]="{ btn: isWeatherLoaded }"
+    mat-raised-button
+    color="accent"
+    (click)="cityApi(model)"
+  >
+    See current weather
+  </button>
+</div>
+
+<app-weather
+  *ngIf="isWeatherLoaded"
+  [weather]="this.weather"
+  [grade]="grade"
+  [windSpeed]="windSpeed"
+></app-weather>

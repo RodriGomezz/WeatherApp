@@ -1,0 +1,126 @@
+<div class="containerWeather" [@animateWeather]="state" >
+  <div class="background">
+    <mat-card class="card">
+      <mat-card-content class="card-content">
+        <div>
+          <span
+            class="material-symbols-outlined"
+            *ngIf="
+              weather.weather[0].main === 'Clear' &&
+              this.time >= this.sunrise &&
+              this.time <= this.sunset
+            "
+            >sunny</span
+          >
+          <span
+            class="material-symbols-outlined"
+            *ngIf="
+              weather.weather[0].main === 'Clear' &&
+              (this.time < this.sunrise || this.time > this.sunset)
+            "
+            >clear_night</span
+          >
+          <span
+            class="material-symbols-outlined"
+            *ngIf="
+              weather.weather[0].main === 'Clouds' &&
+              weather.weather[0].description === 'few clouds' &&
+              this.time >= this.sunrise &&
+              this.time <= this.sunset
+            "
+            >partly_cloudy_day</span
+          >
+          <span
+            class="material-symbols-outlined"
+            *ngIf="
+              weather.weather[0].main === 'Clouds' &&
+              weather.weather[0].description === 'few clouds' &&
+              (this.time < this.sunrise || this.time > this.sunset)
+            "
+            >nights_stay</span
+          >
+          <span
+            class="material-symbols-outlined"
+            *ngIf="
+              weather.weather[0].main === 'Clouds' &&
+              !(weather.weather[0].description === 'few clouds')
+            "
+            >cloud</span
+          >
+          <span
+            class="material-symbols-outlined"
+            *ngIf="
+              weather.weather[0].main === 'Fog' ||
+              weather.weather[0].main === 'Haze' ||
+              weather.weather[0].main === 'Mist'
+            "
+            >foggy</span
+          >
+          <span
+            class="material-symbols-outlined"
+            *ngIf="
+              weather.weather[0].main === 'Drizzle' ||
+              weather.weather[0].main === 'Rain'
+            "
+            >rainy</span
+          >
+          <span
+            class="material-symbols-outlined"
+            *ngIf="weather.weather[0].main === 'Thunderstrom'"
+            >thunderstor</span
+          >
+          <span
+            class="material-symbols-outlined"
+            *ngIf="weather.weather[0].main === 'Snow'"
+            >cloudy_snowing</span
+          >
+          <!----------------- Weather data ----------------->
+          <div class="location">
+            <h1 class="city">
+              <span class="material-symbols-outlined location"
+                >location_on</span
+              >
+              {{ weather.name }}
+            </h1>
+            <h1>weather: {{ weather.weather[0].main }}</h1>
+          </div>
+        </div>
+        <div class="temp-body">
+          <h1 class="temp">
+            {{ weather.main.temp | number : "1.0-0" }}º{{ this.grade }}
+          </h1>
+          <h1>
+            {{ weather.main.temp_min | number : "1.0-0" }}º{{ this.grade }}/{{
+              weather.main.temp_max | number : "1.0-0"
+            }}º{{ this.grade }}
+          </h1>
+        </div>
+        <div class="temp">
+          <h1>feels like: {{ weather.main.feels_like }}º{{ this.grade }}</h1>
+          <h1>sunrise: {{ this.sunrise | date : "H:mm" }}</h1>
+          <h1>sunset: {{ this.sunset | date : "H:mm" }}</h1>
+        </div>
+        <div class="extra">
+          <h1 class="calendar">
+            <span class="material-symbols-outlined calendarIcon"
+              >calendar_month</span
+            >{{ this.time | date : "dd/MM/yyyy" }}
+          </h1>
+          <h1 class="clock">
+            <span class="material-symbols-outlined clockIcon">schedule</span
+            >{{ this.time | date : "H:mm" }}
+          </h1>
+          <h1 class="wind">
+            <span class="material-symbols-outlined windIcon"> air </span
+            >{{ weather.wind.speed }} {{ this.windSpeed }}
+          </h1>
+          <h1 class="humidity">
+            <span class="material-symbols-outlined humidityIcon"
+              >humidity_percentage</span
+            >{{ weather.main.humidity }}%
+          </h1>
+        </div>
+      </mat-card-content>
+    </mat-card>
+  </div>
+</div>
