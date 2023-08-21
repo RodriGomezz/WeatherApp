@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { catchError, throwError } from 'rxjs';
 
-const URL = 'https://weather-back-qw3i.onrender.com/';
+const URL = 'https://weather-back-irfv.onrender.com/';
 
 @Injectable({
   providedIn: 'root',
